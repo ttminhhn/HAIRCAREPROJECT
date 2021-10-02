@@ -29,5 +29,23 @@ namespace HAIRCARE.APPLICATION.Base.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        public string CreateVerifyToken(JwtClaimSetting setting)
+        {
+            var key = Encoding.ASCII.GetBytes(JwtSetting.SECRET);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Email, setting.Email),
+                    new Claim(ClaimTypes.NameIdentifier, setting.Id.ToString()),
+                }),
+                Expires = DateTime.UtcNow.AddDays(JwtSetting.VERIFY_TOKEN_EXPIRE_DAY),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
     }
 }

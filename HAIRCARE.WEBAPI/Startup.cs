@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using HAIRCARE.APPLICATION;
 using HAIRCARE.INFRASTURUCTURE;
 using Microsoft.OpenApi.Models;
+using HAIRCARE.WEBAPI.Filters;
+using System.Text.Json;
 
 namespace HAIRCARE.WEBAPI
 {
@@ -48,6 +50,16 @@ namespace HAIRCARE.WEBAPI
                   options.SubstituteApiVersionInUrl = true;
               }
             );
+
+            services
+                .AddControllers(options =>
+                    options.Filters.Add(new ApiExceptionFilterAttribute()))
+                .AddJsonOptions(jsonOptions =>
+                    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                )
+                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
             services.AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HAIRCARE.APPLICATION.Business.AuthenticationFunctions.Queries
+namespace HAIRCARE.APPLICATION.Business.AuthenticationFunctions.Queries.LoginQuery
 {
     public class LoginQueryVm
     {

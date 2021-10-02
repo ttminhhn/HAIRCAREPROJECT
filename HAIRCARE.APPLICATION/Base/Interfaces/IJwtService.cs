@@ -7,6 +7,7 @@ namespace HAIRCARE.APPLICATION.Base.Interfaces
     public interface IJwtService
     {
         string CreateAccessToken(JwtClaimSetting setting);
+        string CreateVerifyToken(JwtClaimSetting setting);
     }
     public class JwtClaimSetting
     {

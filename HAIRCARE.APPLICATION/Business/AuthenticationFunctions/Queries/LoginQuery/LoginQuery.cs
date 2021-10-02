@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HAIRCARE.APPLICATION.Business.AuthenticationFunctions.Queries
+namespace HAIRCARE.APPLICATION.Business.AuthenticationFunctions.Queries.LoginQuery
 {
     public class LoginQuery : IRequest<LoginQueryVm>
     {
